@@ -1,13 +1,9 @@
-async function getPosts() {
-  const response = await fetch(`${process.env.BASE_URL}/api/getPosts`);
-  if (!response.ok) {
-    console.log(response);
+export default function Home() {
+  async function getPost() {
+    const response = await fetch("/api/post");
+    const data = await response.json();
+    console.log(data);
   }
-  return response.json();
-}
-export default async function Home() {
-  const data = await getPosts();
-  console.log(data);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className="bg-slate-100 text-4xl text-black py-2 px-5 font-medium">

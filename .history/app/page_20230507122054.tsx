@@ -1,5 +1,5 @@
 async function getPosts() {
-  const response = await fetch(`${process.env.BASE_URL}/api/getPosts`);
+  const response = await fetch("/api/getPosts");
   if (!response.ok) {
     console.log(response);
   }
