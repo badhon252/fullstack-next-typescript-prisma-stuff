@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 
 type postProps = {
   title: string;
+  content: string;
 };
 
 export default async function handler(
@@ -15,13 +16,14 @@ export default async function handler(
     const post: postProps = JSON.parse(req.body);
     if (req.method === "POST") {
       //Check for tiitle
-      if (!post.title.length) {
-        return res.status(400).json({ message: "Title is required" });
+      if (!post.title.length && !post.content.length) {
+        return res.status(400).json({ message: "Fill is required" });
       }
       try {
         const data = await prisma.post.create({
           data: {
             title: post.title,
+            content: post.content,
           },
         });
         res.status(200).json(data);

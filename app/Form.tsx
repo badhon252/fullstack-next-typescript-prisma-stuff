@@ -1,48 +1,49 @@
-"use client";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
 
-export default function FormData() {
+export default function BlogForm() {
   const [title, setTitle] = useState("");
-  // const [content, setContent] = useState("");
+  const [content, setContent] = useState("");
   const router = useRouter();
 
-  //Create a submit post
-  async function submitPost(e: React.FormEvent) {
+  async function submitPost(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = await fetch("/api/createPost", {
       method: "POST",
-      body: JSON.stringify({ title }),
+      body: JSON.stringify({ title, content }),
     });
     const res = await data.json();
     router.refresh();
     if (!res.ok) console.log(res.message);
     setTitle("");
-    // setContent("");
+    setContent("");
   }
+
   return (
-    <form onSubmit={submitPost}>
-      <input
-        className="bg-gray m-5 p-1 text-black"
-        type="text"
-        name="title"
-        placeholder="Title..."
-        onChange={(e) => setTitle(e.target.value)}
-        value={title}
-      />{" "}
-      {/* <textarea
-        className="bg-gray m-5 p-1 text-black"
-        name="content"
-        placeholder="Content..."
-        onChange={(e) => setContent(e.target.value)}
-        value={content}
-      /> */}
-      <button
-        type="submit"
-        className="bg-green-300 py-1 px-2 hover:bg-green-600 rounded text-black"
-      >
-        Post
-      </button>
-    </form>
+    <div className="container mx-auto py-8">
+      <form onSubmit={submitPost} className="max-w-2xl mx-auto">
+        <input
+          className="w-full bg-gray-200 border border-gray-300 rounded-md py-2 px-4 mb-4 text-black"
+          type="text"
+          name="title"
+          placeholder="Title..."
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+        />
+        <textarea
+          className="w-full h-40 bg-gray-200 border border-gray-300 rounded-md py-2 px-4 mb-4 text-black resize-none"
+          name="content"
+          placeholder="Content..."
+          onChange={(e) => setContent(e.target.value)}
+          value={content}
+        />
+        <button
+          type="submit"
+          className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded"
+        >
+          Post
+        </button>
+      </form>
+    </div>
   );
 }

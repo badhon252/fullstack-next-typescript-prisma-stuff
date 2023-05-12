@@ -1,4 +1,8 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# This is a blog website
+
+## Domain name: talengForge
+
+# In the Home page, There will be two section, One is Blog posts, And the second One is Grids of blog posts, what have i already read and what have writing by own, Ofcourse they're will be in the seperate section
 
 ## Getting Started
 
