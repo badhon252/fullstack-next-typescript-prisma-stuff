@@ -31,11 +31,11 @@ export default function Home() {
         const data = await getPosts();
         console.log("Fetched posts:", data);
         setPosts(data);
+        router.refresh();
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
     }
-    router.refresh();
 
     fetchData();
   }, []);
